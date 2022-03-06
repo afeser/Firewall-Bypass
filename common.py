@@ -14,7 +14,6 @@ def decrypt(data):
 
     output_data = b''
     for index in range(len(data)):
-        # skip tag 3 => b'a'
         if data_received % (len(tag1) + 1) == len(tag1):
             output_data = output_data + data[index:index+1]
 
