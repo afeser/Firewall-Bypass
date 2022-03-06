@@ -8,10 +8,10 @@ import socket
 import numpy as np
 
 HOST = "0.0.0.0"  # Standard loopback interface address (localhost)
-PORT = 8080  # Port to listen on (non-privileged ports are > 1023)
+PORT = 80  # Port to listen on (non-privileged ports are > 1023)
 print('Listening on', PORT)
 
-BLOCKED_PORT = 10022
+BLOCKED_PORT = 10012
 
 # socket connecting to the ssh server
 ssh_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -31,6 +31,7 @@ def listen_to_remote_send_to_local_ssh():
 
         ssh_server_socket.sendall(data)
         if not data:
+            sys.exit(1)
             break
 
         
