@@ -31,7 +31,7 @@ print(' - OK')
 def listen_to_local_send_to_remote():
     while True:
         data = conn.recv(1024)
-        print('Dual sent', len(data))
+        # print('Dual sent', len(data))
         # encrypt here
         data = encrypt(data)
 
@@ -43,7 +43,7 @@ def listen_to_local_send_to_remote():
 def listen_to_remote_send_to_local():
     while True:
         data = remote_socket.recv(1024)
-        print('Sent to dual', len(data))
+        # print('Sent to dual', len(data))
         # decrypt
         data = decrypt(data)
 

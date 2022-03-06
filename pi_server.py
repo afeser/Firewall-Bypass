@@ -27,7 +27,7 @@ conn, addr = s.accept()
 def listen_to_remote_send_to_local_ssh():
     while True:
         data = conn.recv(1024)
-        print('Data read from remote with length', len(data))
+        # print('Data read from remote with length', len(data))
         data = decrypt(data)
 
         ssh_server_socket.sendall(data)
@@ -39,7 +39,7 @@ def listen_to_remote_send_to_local_ssh():
 def listen_to_local_ssh_send_to_remote():
     while True:
         data = ssh_server_socket.recv(1024)
-        print('Data read from local SSH with length', len(data))
+        # print('Data read from local SSH with length', len(data))
         # encrypt data
         data = encrypt(data)
 
