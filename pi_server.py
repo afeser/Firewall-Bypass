@@ -6,6 +6,7 @@ buradaki olay, gelen veriyi local ssh portuna yonlendiriyor
 from common import encrypt, decrypt
 import socket
 import numpy as np
+import os
 
 HOST = "0.0.0.0"  # Standard loopback interface address (localhost)
 PORT = 80  # Port to listen on (non-privileged ports are > 1023)
@@ -31,7 +32,7 @@ def listen_to_remote_send_to_local_ssh():
 
         ssh_server_socket.sendall(data)
         if not data:
-            sys.exit(1)
+            os._exit(1)
             break
 
         
