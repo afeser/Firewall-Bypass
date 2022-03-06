@@ -7,28 +7,31 @@ from common import encrypt, decrypt, partial_send
 import socket
 import numpy as np
 
-REMOTE_IP = 'localhost'
+REMOTE_IP = '20.121.17.35'
 
 # THE DUAL OF THIS PROGRAM!
-REMOTE_DUAL_PORT = 8080
+REMOTE_DUAL_PORT = 80
 
 # WHERE WE SHOULD SSH INTO?
 LOCAL_PORT = 8001
 
 # socket connecting to the ssh server
+print('Connecting to the dual program', end='')
 remote_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 remote_socket.connect((REMOTE_IP, REMOTE_DUAL_PORT))
+print(' - OK')
 
+print('Creating local port and listening for connections', end='')
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind(('localhost', LOCAL_PORT))
 s.listen()
 conn, addr = s.accept()
+print(' - OK')
 
-tag1 = '<html>'.encode('utf-8')
 def listen_to_local_send_to_remote():
     while True:
         data = conn.recv(1024)
-        print('Data read from local with length', len(data))
+        print('Dual sent', len(data))
         # encrypt here
         data = encrypt(data)
 
@@ -40,7 +43,7 @@ def listen_to_local_send_to_remote():
 def listen_to_remote_send_to_local():
     while True:
         data = remote_socket.recv(1024)
-        print('Data read from remote with length', len(data))
+        print('Sent to dual', len(data))
         # decrypt
         data = decrypt(data)
 
