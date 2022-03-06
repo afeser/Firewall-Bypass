@@ -6,6 +6,7 @@ run this on the local server and connect to the remote blocked port
 from common import encrypt, decrypt, partial_send
 import socket
 import numpy as np
+import os
 
 REMOTE_IP = '20.121.17.35'
 
@@ -37,6 +38,7 @@ def listen_to_local_send_to_remote():
 
         remote_socket.sendall(data)
         if not data:
+            os._exit(1)
             break
 
         
