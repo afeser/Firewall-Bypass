@@ -2,12 +2,25 @@ PACKAGE_SIZE = 256
 
 tag1 = b'<html>'
 tag2 = b'</html>'
+tag3 = b'a'
+
+data_received = 0
 
 def encrypt(data):
-    return b''.join([tag1 + data[index:index+1] + tag2 for index in range(len(data))])
+    return b''.join([b'a' + data[index:index+1] for index in range(len(data))])
 
 def decrypt(data):
-    return data.replace(tag1, b'').replace(tag2, b'')
+    global data_received
+
+    output_data = b''
+    for index in range(len(data)):
+        data_received = data_received + 1
+
+        # skip tag 3 => b'a'
+        if data_received % 2 == 0:
+            output_data = output_data + data[index:index+1]
+
+    return output_data
 
 def partial_send(conn, data):
     """

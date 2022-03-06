@@ -3,7 +3,7 @@ raspberry pi uzerindeki server bu!
 
 buradaki olay, gelen veriyi local ssh portuna yonlendiriyor
 """
-from common import encrypt, decrypt, partial_send
+from common import encrypt, decrypt
 import socket
 import numpy as np
 
@@ -41,7 +41,7 @@ def listen_to_local_ssh_send_to_remote():
         # encrypt data
         data = encrypt(data)
 
-        partial_send(conn, data)
+        conn.sendall(data)
         if not data:
             break
 

@@ -32,7 +32,7 @@ def listen_to_local_send_to_remote():
         # encrypt here
         data = encrypt(data)
 
-        partial_send(remote_socket, data)
+        remote_socket.sendall(data)
         if not data:
             break
 
